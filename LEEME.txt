@@ -1,0 +1,45 @@
+AutomataLab - Aplicacion de Automatas Finitos
+Python + Tkinter + Graphviz
+
+========================================
+INSTALACION RAPIDA
+========================================
+
+Windows:
+  1. Doble clic en install_windows.bat
+  2. Luego doble clic en ejecutar.bat
+
+Linux / macOS:
+  1. Terminal: chmod +x install_linux_mac.sh && ./install_linux_mac.sh
+  2. Luego: ./ejecutar.sh  o  python3 main.py
+
+========================================
+DEPENDENCIAS
+========================================
+
+| Dependencia       | Que hace                    | Se instala con              |
+|-------------------|-----------------------------|-----------------------------|
+| Python 3.8+       | Lenguaje base               | python.org / apt / brew     |
+| tkinter           | Interfaz grafica            | Viene con Python            |
+| Pillow            | Renderizado de imagenes PNG | pip install Pillow          |
+| graphviz (Python) | Binding Python              | pip install graphviz        |
+| Graphviz (sistema)| Motor de diagramas         | graphviz.org / apt / brew   |
+
+========================================
+FUNCIONALIDADES
+========================================
+
+- AFD / AFN / AFN-lambda: definicion, visualizacion, procesamiento de cadenas
+- Minimizacion de AFD con tabla de distinguibilidad paso a paso
+- Equivalencia entre AFDs con cadena testigo
+- Operaciones: union, interseccion, diferencia, complemento
+- Propiedades: lenguaje vacio, infinito, finito, estados accesibles/productivos/utiles
+- Construccion de subconjuntos (AFN -> AFD)
+- Eliminacion de lambda-transiciones (AFN-lambda -> AFN)
+- Construccion de Thompson (ER -> AFN-lambda)
+- Lema de Arden (AFD -> ER)
+- Cadena de conversion: AFN-lambda -> AFN -> AFD -> AFD Minimo
+- 7 ejemplos predefinidos
+- Guardar diagrama como PNG (300 DPI), SVG, PDF o EPS
+- Importar/Exportar JSON
+- Tema oscuro/claro (Ctrl+T)
