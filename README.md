@@ -1,7 +1,7 @@
 # AutomaTEC-Lab
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21325359.svg)](https://doi.org/10.5281/zenodo.21325359)
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-v1.1.2-green.svg)](https://github.com/automatec70-ctrl/AutomaTEC-Lab/releases/tag/v1.1.2)
 
@@ -325,10 +325,13 @@ Contact: victor.gp@sjuanrio.tecnm.mx
 
 ## License
 
-This software is distributed under the
-[Creative Commons Attribution 4.0 International (CC-BY 4.0)](https://creativecommons.org/licenses/by/4.0/) license.
+The **source code** of AutomaTEC-Lab is distributed under the
+[MIT License](https://opensource.org/licenses/MIT) — you are free to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies of the software,
+provided that the copyright notice and this permission notice are included in all copies.
 
-You are free to use, copy, modify, and redistribute this software for any purpose,
-including commercial use, provided that appropriate credit is given to the original authors.
+The **documentation and associated manuscript** are licensed under
+[Creative Commons Attribution 4.0 International (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
 
-[![License: CC BY 4.0](https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![License: CC BY 4.0](https://img.shields.io/badge/Docs-CC%20BY%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by/4.0/)
