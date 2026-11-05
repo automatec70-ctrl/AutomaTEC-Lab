@@ -312,12 +312,12 @@ https://doi.org/10.5281/zenodo.21325359
 
 | Name | Affiliation |
 |---|---|
-| **Víctor Alberto Gómez-Pérez** *(corresponding author)* | Tecnológico Nacional de México / Instituto Tecnológico de San Juan del Río |
+| Víctor Alberto Gómez-Pérez | Tecnológico Nacional de México / Instituto Tecnológico de San Juan del Río |
 | Roberto Enrique Alberto-Lira | Independent researcher |
 | Armida González-Lorence | Tecnológico Nacional de México / Instituto Tecnológico de San Juan del Río |
 | Alejandro Jarillo-Silva | Universidad de la Sierra Sur |
 | José Alejandro Ascencio-Laguna | Tecnológico Nacional de México / Instituto Tecnológico de San Juan del Río |
-| Sonia Mendoza | Department of Computer Science, CINVESTAV-IPN |
+| **Sonia Mendoza** *(corresponding author)* | Department of Computer Science, CINVESTAV-IPN |
 
 Contact: victor.gp@sjuanrio.tecnm.mx
 
