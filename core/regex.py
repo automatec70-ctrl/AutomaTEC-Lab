@@ -705,7 +705,16 @@ class ArdenConversion:
             for qj, coef in eq_i['coeficientes'].items():
                 if qj != qi:
                     B_terminos[qj] = coef
+            # B_constante: True si qi es estado final, O si tiene caminos a aceptación
+            # acumulados en iteraciones previas via constante_extra
             B_constante = eq_i['constante']
+            extras = eq_i.get('constante_extra', [])
+            # extras son expresiones de la forma C·A* que ya son caminos a aceptación;
+            # se tratan como términos constantes adicionales en B
+            if extras:
+                B_constante_exprs = extras  # expresiones concretas
+            else:
+                B_constante_exprs = []
 
             # Por el Lema de Arden: X_i = A*·B
             # Sustituir X_i en todas las demás ecuaciones
@@ -741,18 +750,21 @@ class ArdenConversion:
                         ecuaciones[qk]['coeficientes'][qj] = []
                     ecuaciones[qk]['coeficientes'][qj].append(nuevo_coef)
 
-                # Si B tiene constante (ε)
+                # Si B tiene constante (ε simple) o expresiones constantes
+                # acumuladas (B_constante_exprs), propagar como constante en qk.
+                C_expr = self._combinar_alternativas(C)
                 if B_constante:
-                    # C · A* · ε = C · A*
-                    C_expr = self._combinar_alternativas(C)
+                    # C · A* · ε = C · A*  → camino de qk a aceptación
                     nuevo_termino = self._concat_expr(C_expr, A_star)
-                    # Agregar a los coeficientes de qk hacia qi ya no es necesario
-                    # sino que se vuelve constante
-                    # C·A* es un camino de qk a sí mismo pasando por qi
-                    # Esto se agrega como bucle propio
-                    if qk not in ecuaciones[qk]['coeficientes']:
-                        ecuaciones[qk]['coeficientes'][qk] = []
-                    ecuaciones[qk]['coeficientes'][qk].append(nuevo_termino)
+                    if 'constante_extra' not in ecuaciones[qk]:
+                        ecuaciones[qk]['constante_extra'] = []
+                    ecuaciones[qk]['constante_extra'].append(nuevo_termino)
+                for b_extra in B_constante_exprs:
+                    # C · A* · b_extra → camino de qk a aceptación
+                    nuevo_termino = self._concat_expr(C_expr, A_star, b_extra)
+                    if 'constante_extra' not in ecuaciones[qk]:
+                        ecuaciones[qk]['constante_extra'] = []
+                    ecuaciones[qk]['constante_extra'].append(nuevo_termino)
 
                 # Eliminar X_i de la ecuación de qk
                 del ecuaciones[qk]['coeficientes'][qi]
@@ -787,6 +799,10 @@ class ArdenConversion:
         if B_constante:
             B_partes.append('ε')
 
+        # Incluir caminos a aceptación acumulados desde eliminaciones previas
+        for expr in eq_q0.get('constante_extra', []):
+            B_partes.append(expr)
+
         A_expr = self._combinar_alternativas(A)
         B_expr = self._combinar_alternativas(B_partes)
 
@@ -794,8 +810,9 @@ class ArdenConversion:
         if A_expr and B_expr:
             regex = f'({A_expr})*({B_expr})'
         elif A_expr:
-            # Solo bucle propio, sin constante ni otros términos
-            regex = f'({A_expr})*'
+            # Solo bucle propio sin camino a aceptación: lenguaje vacío
+            # (q0 no es estado final y no hay ningún camino a un estado final)
+            regex = '∅'
         elif B_expr:
             # No hay bucle propio
             regex = B_expr
