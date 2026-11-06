@@ -218,10 +218,48 @@ class TablaTransiciones(tk.Frame):
     def _on_cell_change(self, estado, simbolo, event=None):
         """Maneja la edicion de una celda: actualiza el automata y el canvas."""
         try:
-            new_delta = self.get_delta()
+            entry = self.entries.get((estado, simbolo))
+            val = entry.get().strip() if entry else ''
+            c = self.theme.colors
+
             if self.app and hasattr(self.app, 'current_automaton'):
                 auto = self.app.current_automaton
+
+                # Validar que el estado destino esté declarado (solo AFD y AFN)
+                if val and self.tipo != 'AFN-λ':
+                    destinos = [d.strip() for d in val.split(',') if d.strip()]
+                    estados_validos = auto.estados if hasattr(auto, 'estados') else set()
+                    invalidos = [d for d in destinos if d not in estados_validos]
+                    if invalidos:
+                        if entry:
+                            entry.configure(highlightbackground='#CC3333',
+                                            highlightcolor='#CC3333')
+                        if hasattr(self.app, 'add_log'):
+                            self.app.add_log(
+                                f'Transición inválida: δ({estado}, {simbolo}) → '
+                                f'{", ".join(invalidos)} no declarado(s)', 'error')
+                        return
+                elif val and self.tipo == 'AFN-λ':
+                    destinos = [d.strip() for d in val.split(',') if d.strip()]
+                    estados_validos = auto.estados if hasattr(auto, 'estados') else set()
+                    invalidos = [d for d in destinos if d not in estados_validos]
+                    if invalidos:
+                        if entry:
+                            entry.configure(highlightbackground='#CC3333',
+                                            highlightcolor='#CC3333')
+                        if hasattr(self.app, 'add_log'):
+                            self.app.add_log(
+                                f'Transición inválida: δ({estado}, {simbolo}) → '
+                                f'{", ".join(invalidos)} no declarado(s)', 'error')
+                        return
+
+                # Restaurar color normal si el valor es válido o vacío
+                if entry:
+                    entry.configure(highlightbackground=c['border'],
+                                    highlightcolor=c['accent'])
+
                 # Actualizar el delta del automata
+                new_delta = self.get_delta()
                 auto.delta = new_delta
                 # Redibujar el canvas
                 if hasattr(self.app, 'canvas_widget'):
