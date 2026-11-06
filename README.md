@@ -267,7 +267,7 @@ AutomaTEC-Lab/
 ├── core/
 │   ├── afd.py                 # DFA: definition, minimization, equivalence, operations
 │   ├── afn.py                 # NFA: subset construction
-│   ├── afn_lambda.py          # λ-NFA: ε-closure, λ-elimination
+│   ├── afn_lambda.py          # λ-NFA: λ-closure, λ-elimination
 │   ├── regex.py               # Parser, Thompson construction, Arden Lemma
 │   ├── serializer.py          # JSON/CSV import-export
 │   ├── utils.py               # BFS, state renaming, validation
