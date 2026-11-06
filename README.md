@@ -1,6 +1,6 @@
 # AutomaTEC-Lab
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21325359.svg)](https://doi.org/10.5281/zenodo.21325359)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.21264729.svg)](https://doi.org/10.5281/zenodo.21264729)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![Version](https://img.shields.io/badge/version-v1.1.2-green.svg)](https://github.com/automatec70-ctrl/AutomaTEC-Lab/releases/tag/v1.1.2)
@@ -320,7 +320,7 @@ Software release:
 Gómez-Pérez VA, Alberto-Lira RE, González-Lorence A,
 Jarillo-Silva A, Ascencio-Laguna JA, Mendoza S.
 AutomaTEC-Lab v1.1.2 [Software]. Zenodo; 2026.
-https://doi.org/10.5281/zenodo.21325359
+https://doi.org/10.5281/zenodo.21264729
 ```
 
 ---
