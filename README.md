@@ -74,6 +74,17 @@ sudo dnf install graphviz
 
 ---
 
+## Quick start (Windows)
+
+For most users, two steps are enough:
+
+1. **Run `install_windows.bat`** — installs Python, Tkinter, Graphviz, Pillow, and the graphviz Python package automatically. Internet connection required. Run this only once.
+2. **Run `ejecutar.bat`** — opens AutomaTEC-Lab. Use this every time you want to start the application.
+
+If the installation script shows a yellow warning from winget, that is normal — it falls back to a direct download automatically and no action is required.
+
+---
+
 ## Installation
 
 ### Option 1 — Automated scripts (recommended)
@@ -82,14 +93,13 @@ sudo dnf install graphviz
 ```
 install_windows.bat
 ```
+Automatically installs all dependencies (Python 3.11 with Tkinter, Graphviz, Pillow, graphviz Python package). Requires an internet connection. Run once; after that, use `ejecutar.bat` to launch the application.
 
 **macOS / Linux:**
 ```bash
 chmod +x install_linux_mac.sh
 ./install_linux_mac.sh
 ```
-
-The scripts automatically verify Python, install all pip dependencies, and check for Graphviz system installation.
 
 ### Option 2 — Manual installation
 
@@ -111,6 +121,12 @@ python main.py
 
 ### Starting the application
 
+**Windows (recommended):**
+```
+ejecutar.bat
+```
+
+**Any platform (command line):**
 ```bash
 python main.py
 ```
@@ -159,7 +175,7 @@ Computes whether the language is **empty**, **finite**, or **infinite**, and cla
 With a λ-NFA loaded as the current automaton, click **Ejecutar cadena completa / Run full pipeline** to execute all four conversion steps:
 
 1. **Step 1/4** — Display original λ-NFA
-2. **Step 2/4** — λ-NFA → NFA (eliminate λ-transitions via ε-closures)
+2. **Step 2/4** — λ-NFA → NFA (eliminate λ-transitions via λ-closures)
 3. **Step 3/4** — NFA → DFA (subset construction)
 4. **Step 4/4** — DFA → minimal DFA (distinguishability table)
 
@@ -245,8 +261,9 @@ For NFA and λ-NFA, transition values are lists of states instead of single stat
 ```
 AutomaTEC-Lab/
 ├── main.py                    # Application entry point
-├── install_windows.bat        # Windows installation script
-├── install_linux_mac.sh       # macOS/Linux installation script
+├── ejecutar.bat               # Windows launcher (run this to open the app)
+├── install_windows.bat        # Windows installation script (run once)
+├── install_linux_mac.sh       # macOS/Linux installation script (run once)
 ├── core/
 │   ├── afd.py                 # DFA: definition, minimization, equivalence, operations
 │   ├── afn.py                 # NFA: subset construction
