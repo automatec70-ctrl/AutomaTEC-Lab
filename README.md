@@ -133,12 +133,14 @@ python main.py
 
 ### Basic workflow
 
-1. **Select automaton type** — Choose DFA, NFA, or λ-NFA from the left panel
-2. **Define states** — Add states using the "Agregar / Add" button; mark the initial state and final states
-3. **Define alphabet** — Add symbols to the alphabet
-4. **Enter transitions** — Fill in the transition table in the "Tabla / Table" tab
-5. **Visualize** — The diagram updates automatically after each change
-6. **Process strings** — Go to "Procesar / Process" tab, enter a string, and click "Verificar / Verify"
+1. **Select automaton type** — Choose DFA, NFA, or λ-NFA from the radio buttons in the left sidebar; the model indicator updates in the top-right corner and the input fields adapt accordingly.
+2. **Define the automaton** — Add states, mark the initial state and final states, define the alphabet, and fill in the transition table in the **Tabla / Table** tab. The state diagram is generated automatically on the central canvas by the Graphviz DOT engine.
+3. **Process a string** — Go to the **Procesar / Process** tab, enter a string *w*, and click **Verificar / Verify** for an accept/reject verdict with the full execution trace (active state, consumed symbol, remaining string at each step). Use **Modo Paso a Paso / Step-by-step** to advance one symbol at a time.
+4. **Apply an algorithmic operation** — Use the dedicated tabs: **Minimiza** (DFA minimization, per-iteration display), **Equivalenci** (equivalence check with witness string), **Operaciones** (Boolean operations), **Propiedades** (language properties).
+5. **Run the full conversion pipeline** — With a λ-NFA loaded, go to **Conversión** and click **Ejecutar cadena completa / Run full pipeline** to execute λ-NFA → NFA → DFA → minimal DFA; each stage is independently navigable.
+6. **Monitor the log panel** — The log panel (lower area, always visible) shows a timestamped entry for every operation and every error message in the active language. No operation fails silently.
+7. **Export the diagram** — Click **Guardar imagen / Save image** in the toolbar to export PNG (300 DPI), SVG, PDF, or EPS.
+8. **Save or reload the session** — Use **Exportar JSON / Importar JSON** in the left sidebar to save and reload automata as human-readable `.json` files.
 
 ### Loading a predefined example
 
