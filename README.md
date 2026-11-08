@@ -216,7 +216,7 @@ With a DFA loaded, click **AFD → ER** to convert the current DFA to a regular 
 | 2 | Strings with an even number of zeros | DFA |
 | 3 | (a\|b)*abb | DFA |
 | 4 | Strings containing the substring "01" | DFA |
-| 5 | a*b⁺ with ε-transitions | λ-NFA |
+| 5 | a*b⁺ with λ-transitions | λ-NFA |
 | 6 | Non-minimal DFA (for minimization practice) | DFA |
 | 7 | Pair of equivalent DFAs | DFA |
 
@@ -254,7 +254,7 @@ Automata are serialized in human-readable JSON. Example DFA:
 }
 ```
 
-For NFA and λ-NFA, transition values are lists of states instead of single states. λ-NFA transitions use the key `"λ"` for epsilon transitions.
+For NFA and λ-NFA, transition values are lists of states instead of single states. λ-NFA transitions use the key `"λ"` for λ-transitions.
 
 ---
 
