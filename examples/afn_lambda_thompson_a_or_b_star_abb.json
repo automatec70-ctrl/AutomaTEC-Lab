@@ -1,0 +1,109 @@
+{
+  "tipo": "AFNLambda",
+  "estados": [
+    "q1",
+    "q2",
+    "q3",
+    "q4",
+    "q5",
+    "q6",
+    "q7",
+    "q8",
+    "q9",
+    "q10",
+    "q11",
+    "q12",
+    "q13",
+    "q14"
+  ],
+  "alfabeto": [
+    "a",
+    "b"
+  ],
+  "estado_inicial": "q7",
+  "estados_finales": [
+    "q14"
+  ],
+  "transiciones": [
+    {
+      "desde": "q1",
+      "simbolo": "a",
+      "hacia": "q2"
+    },
+    {
+      "desde": "q3",
+      "simbolo": "b",
+      "hacia": "q4"
+    },
+    {
+      "desde": "q5",
+      "simbolo": "λ",
+      "hacia": "q1"
+    },
+    {
+      "desde": "q5",
+      "simbolo": "λ",
+      "hacia": "q3"
+    },
+    {
+      "desde": "q2",
+      "simbolo": "λ",
+      "hacia": "q6"
+    },
+    {
+      "desde": "q4",
+      "simbolo": "λ",
+      "hacia": "q6"
+    },
+    {
+      "desde": "q7",
+      "simbolo": "λ",
+      "hacia": "q5"
+    },
+    {
+      "desde": "q7",
+      "simbolo": "λ",
+      "hacia": "q8"
+    },
+    {
+      "desde": "q6",
+      "simbolo": "λ",
+      "hacia": "q5"
+    },
+    {
+      "desde": "q6",
+      "simbolo": "λ",
+      "hacia": "q8"
+    },
+    {
+      "desde": "q8",
+      "simbolo": "a",
+      "hacia": "q9"
+    },
+    {
+      "desde": "q9",
+      "simbolo": "λ",
+      "hacia": "q10"
+    },
+    {
+      "desde": "q10",
+      "simbolo": "b",
+      "hacia": "q11"
+    },
+    {
+      "desde": "q11",
+      "simbolo": "λ",
+      "hacia": "q12"
+    },
+    {
+      "desde": "q12",
+      "simbolo": "b",
+      "hacia": "q13"
+    },
+    {
+      "desde": "q13",
+      "simbolo": "λ",
+      "hacia": "q14"
+    }
+  ]
+}

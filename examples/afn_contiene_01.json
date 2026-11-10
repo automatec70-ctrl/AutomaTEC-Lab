@@ -1,0 +1,48 @@
+{
+  "tipo": "AFN",
+  "estados": [
+    "q0",
+    "q1",
+    "q2"
+  ],
+  "alfabeto": [
+    "0",
+    "1"
+  ],
+  "estado_inicial": "q0",
+  "estados_finales": [
+    "q2"
+  ],
+  "transiciones": [
+    {
+      "desde": "q0",
+      "simbolo": "0",
+      "hacia": "q0"
+    },
+    {
+      "desde": "q0",
+      "simbolo": "0",
+      "hacia": "q1"
+    },
+    {
+      "desde": "q0",
+      "simbolo": "1",
+      "hacia": "q0"
+    },
+    {
+      "desde": "q1",
+      "simbolo": "1",
+      "hacia": "q2"
+    },
+    {
+      "desde": "q2",
+      "simbolo": "0",
+      "hacia": "q2"
+    },
+    {
+      "desde": "q2",
+      "simbolo": "1",
+      "hacia": "q2"
+    }
+  ]
+}

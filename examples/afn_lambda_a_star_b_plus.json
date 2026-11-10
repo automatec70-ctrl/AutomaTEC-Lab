@@ -1,0 +1,43 @@
+{
+  "tipo": "AFNLambda",
+  "estados": [
+    "q0",
+    "q1",
+    "q2"
+  ],
+  "alfabeto": [
+    "a",
+    "b"
+  ],
+  "estado_inicial": "q0",
+  "estados_finales": [
+    "q2"
+  ],
+  "transiciones": [
+    {
+      "desde": "q0",
+      "simbolo": "a",
+      "hacia": "q0"
+    },
+    {
+      "desde": "q0",
+      "simbolo": "λ",
+      "hacia": "q1"
+    },
+    {
+      "desde": "q1",
+      "simbolo": "b",
+      "hacia": "q1"
+    },
+    {
+      "desde": "q1",
+      "simbolo": "b",
+      "hacia": "q2"
+    },
+    {
+      "desde": "q2",
+      "simbolo": "b",
+      "hacia": "q2"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "tipo": "AFD",
+  "estados": [
+    "q",
+    "r",
+    "s",
+    "t"
+  ],
+  "alfabeto": [
+    "a",
+    "b"
+  ],
+  "estado_inicial": "q",
+  "estados_finales": [
+    "t"
+  ],
+  "transiciones": [
+    {
+      "desde": "q",
+      "simbolo": "a",
+      "hacia": "r"
+    },
+    {
+      "desde": "q",
+      "simbolo": "b",
+      "hacia": "q"
+    },
+    {
+      "desde": "r",
+      "simbolo": "a",
+      "hacia": "r"
+    },
+    {
+      "desde": "r",
+      "simbolo": "b",
+      "hacia": "s"
+    },
+    {
+      "desde": "s",
+      "simbolo": "a",
+      "hacia": "r"
+    },
+    {
+      "desde": "s",
+      "simbolo": "b",
+      "hacia": "t"
+    },
+    {
+      "desde": "t",
+      "simbolo": "a",
+      "hacia": "r"
+    },
+    {
+      "desde": "t",
+      "simbolo": "b",
+      "hacia": "q"
+    }
+  ]
+}
