@@ -48,6 +48,12 @@ class EpsilonNode(ASTNode):
         return "ε"
 
 
+class EmptySetNode(ASTNode):
+    """Hoja: ∅ (lenguaje vacío — no acepta ninguna cadena)."""
+    def __repr__(self):
+        return "∅"
+
+
 class UnionNode(ASTNode):
     """Nodo unión: left | right."""
     def __init__(self, left: ASTNode, right: ASTNode):
@@ -128,6 +134,15 @@ class RegexParser:
     OP_LPAREN = '('
     OP_RPAREN = ')'
 
+    # Tokens especiales (reservados — no son símbolos de alfabeto)
+    TOK_EPSILON   = 'ε'  # ε U+03B5 — cadena vacía
+    TOK_EMPTY_SET = '∅'  # ∅ U+2205 — lenguaje vacío
+
+    # Conjunto de todos los operadores (para lógica de concatenación implícita)
+    _OPERADORES = {'|', '.', '*', '+', '?', '(', ')'}
+    # Tokens especiales tratados como operandos terminales
+    _TOKENS_ESPECIALES = {'ε', '∅'}
+
     def __init__(self):
         self.tokens: List[str] = []
         self.pos: int = 0
@@ -166,34 +181,27 @@ class RegexParser:
         """
         Tokeniza la expresión regular, insertando operadores de
         concatenación implícitos ('.') donde corresponda.
-        
+
+        Los caracteres ε (U+03B5) y ∅ (U+2205) son tokens reservados:
+        se tratan como operandos terminales, no como símbolos del alfabeto.
+
         Reglas de inserción de '.':
           Si t[i] es operando o ')' o '*' o '+' o '?'
           y t[i+1] es operando o '(',
           entonces insertar '.' entre t[i] y t[i+1].
         """
-        # Primero: separar caracteres individuales
-        caracteres = list(regex)
-
-        # Filtrar espacios
-        caracteres = [c for c in caracteres if c != ' ']
+        # Separar caracteres individuales y filtrar espacios
+        caracteres = [c for c in regex if c != ' ']
 
         if not caracteres:
             return []
 
         # Insertar operadores de concatenación implícitos
         tokens = [caracteres[0]]
-        operadores_finales = {self.OP_KLEENE, self.OP_PLUS, self.OP_OPTIONAL, self.OP_RPAREN}
-        operandos_iniciales = set()  # Cualquier cosa que no sea operador
 
         for i in range(1, len(caracteres)):
             anterior = caracteres[i - 1]
             actual = caracteres[i]
-
-            # Insertar '.' si:
-            # - El anterior es: operando, ')', '*', '+', '?'
-            # - Y el actual es: operando, '('
-            necesita_concat = False
 
             # El anterior cierra una subexpresión (operando, ), *, +, ?)
             ant_cierra = (anterior not in {self.OP_UNION, self.OP_LPAREN, self.OP_CONCAT})
@@ -292,6 +300,16 @@ class RegexParser:
                 f"Error de parsing: operador '{token}' inesperado en posición {self.pos}"
             )
 
+        elif token == self.TOK_EPSILON:
+            # Token reservado ε → cadena vacía
+            self.pos += 1
+            return EpsilonNode()
+
+        elif token == self.TOK_EMPTY_SET:
+            # Token reservado ∅ → lenguaje vacío
+            self.pos += 1
+            return EmptySetNode()
+
         else:
             # Es un símbolo del alfabeto
             self.pos += 1
@@ -358,6 +376,9 @@ class ThompsonConstruction:
         if isinstance(node, EpsilonNode):
             return self._build_epsilon()
 
+        elif isinstance(node, EmptySetNode):
+            return self._build_empty_set()
+
         elif isinstance(node, SimboloNode):
             return self._build_symbol(node.simbolo)
 
@@ -396,6 +417,17 @@ class ThompsonConstruction:
         afn.definir_estado_inicial(q0)
         afn.agregar_estado_final(qf)
         afn.agregar_transicion_lambda(q0, qf)
+        return afn
+
+    def _build_empty_set(self) -> AFNLambda:
+        """
+        Caso base ∅ (lenguaje vacío): q0 sin estados finales, sin transiciones.
+        No acepta ninguna cadena.
+        """
+        afn = AFNLambda()
+        q0 = self._nuevo_estado()
+        afn.definir_estado_inicial(q0)
+        # Sin estados finales → ninguna cadena es aceptada
         return afn
 
     def _build_symbol(self, simbolo: str) -> AFNLambda:
@@ -946,13 +978,16 @@ def afd_to_regex(afd) -> dict:
 def infer_alphabet(regex: str) -> Set[str]:
     """
     Infiere el alfabeto a partir de una expresión regular,
-    extrayendo todos los símbolos que no son operadores.
-    
+    extrayendo todos los símbolos que no son operadores ni tokens reservados.
+
     Operadores: | . * + ? ( )
+    Tokens reservados (no forman parte del alfabeto): ε (U+03B5), ∅ (U+2205)
     """
-    operadores = {'|', '.', '*', '+', '?', '(', ')', ' '}
+    reservados = {'|', '.', '*', '+', '?', '(', ')', ' ',
+                  'ε',   # ε — cadena vacía
+                  '∅'}   # ∅ — lenguaje vacío
     alfabeto = set()
     for c in regex:
-        if c not in operadores:
+        if c not in reservados:
             alfabeto.add(c)
     return alfabeto
