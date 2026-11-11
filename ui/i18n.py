@@ -378,7 +378,7 @@ _TRANSLATIONS = {
     # ── About dialog ──────────────────────────────────────────────
     'about.text':   {
         'es': (
-            "AutomaTEC-Lab v1.0\n\n"
+            "AutomaTEC-Lab v1.1.2\n\n"
             "Aplicación de Autómatas Finitos\n"
             "AFD · AFN · AFN-λ · Expresiones Regulares\n\n"
             "Características:\n"
@@ -390,11 +390,12 @@ _TRANSLATIONS = {
             "• Lema de Arden (AFD → ER)\n"
             "• Operaciones booleanas\n"
             "• Verificación de equivalencia\n"
-            "• Análisis de propiedades\n\n"
+            "• Análisis de propiedades\n"
+            "• Soporte de ε y ∅ en expresiones regulares\n\n"
             "Tema oscuro/claro · Import/Export JSON"
         ),
         'en': (
-            "AutomaTEC-Lab v1.0\n\n"
+            "AutomaTEC-Lab v1.1.2\n\n"
             "Finite Automata Application\n"
             "DFA · NFA · NFA-λ · Regular Expressions\n\n"
             "Features:\n"
@@ -406,7 +407,8 @@ _TRANSLATIONS = {
             "• Arden's Lemma (DFA → RE)\n"
             "• Boolean operations\n"
             "• Equivalence verification\n"
-            "• Language property analysis\n\n"
+            "• Language property analysis\n"
+            "• ε and ∅ support in regular expressions\n\n"
             "Dark/Light theme · Import/Export JSON"
         ),
     },
