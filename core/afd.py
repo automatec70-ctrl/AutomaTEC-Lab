@@ -929,8 +929,21 @@ class AFD:
         """
         Retorna una copia del AFD sin estados no útiles.
         Elimina estados que no son accesibles o no son productivos.
+
+        Caso especial: si no hay estados útiles pero existe estado inicial
+        (DFA sin estados finales → lenguaje vacío ∅), se preserva el estado
+        inicial como único estado del AFD limpio.  El AFD resultante es el
+        representante canónico del lenguaje vacío: un único estado no final
+        con ninguna transición saliente hacia estados útiles.
         """
         utiles = self.estados_utiles()
+
+        # DFA sin estados finales: estados_productivos() devuelve set() vacío,
+        # por lo que utiles queda vacío y limpiar() produciría un AFD sin
+        # estado inicial (inválido).  En su lugar preservamos el estado inicial
+        # como representación válida del lenguaje vacío ∅.
+        if not utiles and self.estado_inicial:
+            utiles = {self.estado_inicial}
 
         afd_limpio = AFD()
         afd_limpio.alfabeto = set(self.alfabeto)
