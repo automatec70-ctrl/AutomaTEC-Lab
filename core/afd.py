@@ -337,14 +337,35 @@ class AFD:
                     dp = afd_limpio.delta.get(p, {}).get(a)
                     dq = afd_limpio.delta.get(q, {}).get(a)
 
-                    if dp is None or dq is None:
+                    # Tratar transición indefinida como transición al estado muerto
+                    # implícito (no final, sin transiciones salientes).
+                    # Un estado muerto es distinguible de cualquier estado final
+                    # y es indistinguible de otro estado muerto.
+                    DEAD = '__dead__'
+                    dp_eff = dp if dp is not None else DEAD
+                    dq_eff = dq if dq is not None else DEAD
+
+                    if dp_eff == dq_eff:
+                        continue  # Van al mismo destino efectivo, no distingue
+
+                    # Si uno va al estado muerto (no final) y el otro es final → distinguibles
+                    if dp_eff == DEAD and dq_eff in afd_limpio.estados_finales:
+                        tabla[(p, q)] = True
+                        cambio = True
+                        break
+                    if dq_eff == DEAD and dp_eff in afd_limpio.estados_finales:
+                        tabla[(p, q)] = True
+                        cambio = True
+                        break
+
+                    # Ambos van a estados reales distintos → propagar normalmente
+                    if dp_eff == DEAD or dq_eff == DEAD:
+                        # Uno va al muerto (no final), el otro a un estado real no final
+                        # → indistinguibles en este símbolo por ahora (propagar no aplica)
                         continue
 
-                    if dp == dq:
-                        continue  # Van al mismo estado, no se puede distinguir por a
-
                     # Normalizar el par para buscar en la tabla
-                    par_destino = (min(dp, dq), max(dp, dq))
+                    par_destino = (min(dp_eff, dq_eff), max(dp_eff, dq_eff))
                     if par_destino in tabla and tabla[par_destino]:
                         tabla[(p, q)] = True
                         cambio = True
